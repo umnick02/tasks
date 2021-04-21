@@ -5,8 +5,9 @@ import java.util.NoSuchElementException;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
 
+    private static final int DEFAULT_SIZE = 32;
     private int size;
-    private Item[] items = (Item[]) new Object[15000];
+    private Item[] items = (Item[]) new Object[DEFAULT_SIZE];
 
     // construct an empty randomized queue
     public RandomizedQueue() { }
@@ -26,6 +27,13 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         if (item == null) {
             throw new IllegalArgumentException();
         }
+        if (size >= items.length) {
+            Item[] newItems = (Item[]) new Object[items.length * 3/2];
+            for (int i = 0; i < size; i++) {
+                newItems[i] = items[i];
+            }
+            items = newItems;
+        }
         items[size] = item;
         size++;
     }
@@ -34,6 +42,13 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public Item dequeue() {
         if (isEmpty()) {
             throw new NoSuchElementException();
+        }
+        if (size >= DEFAULT_SIZE*2 && size < items.length/3) {
+            Item[] newItems = (Item[]) new Object[items.length/2];
+            for (int i = 0; i < size; i++) {
+                newItems[i] = items[i];
+            }
+            items = newItems;
         }
         int ind = StdRandom.uniform(size);
         Item last = items[size-1];

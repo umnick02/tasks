@@ -95,7 +95,7 @@ public class Deque<Item> implements Iterable<Item> {
 
             @Override
             public Item next() {
-                if (first == null) {
+                if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
                 ItemWrapper old = first;
