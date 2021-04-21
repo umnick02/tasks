@@ -13,7 +13,7 @@ public class Deque<Item> implements Iterable<Item> {
 
     // is the deque empty?
     public boolean isEmpty() {
-        return size == 0;
+        return first == null;
     }
 
     // return the number of items on the deque

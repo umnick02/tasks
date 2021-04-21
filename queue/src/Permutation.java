@@ -5,9 +5,8 @@ import java.util.Iterator;
 public class Permutation {
     public static void main(String[] args) {
         RandomizedQueue<String> queue = new RandomizedQueue<>();
-        String s;
-        while ((s = StdIn.readString()) != null) {
-            queue.enqueue(s);
+        while (!StdIn.isEmpty()) {
+            queue.enqueue(StdIn.readString());
         }
         int k = Integer.parseInt(args[0]);
         Iterator<String> iterator = queue.iterator();
